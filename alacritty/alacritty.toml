@@ -1,0 +1,39 @@
+[terminal.shell]
+program = "/usr/bin/fish"
+args = ["-l"]
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/afterglow.toml"
+]
+
+[font.normal]
+family = "Iosevka Custom"
+
+[font.bold]
+family = "Iosevka Custom"
+
+[font.italic]
+family = "Iosevka Custom"
+
+[font.bold_italic]
+family = "Iosevka Custom"
+
+[font]
+size = 18.0
+
+[window]
+dimensions = { columns = 100, lines = 30 }
+padding = { x = 3, y = 3 }
+dynamic_padding = true
+
+[keyboard]
+bindings = [
+  { key = "C", mods = "Control", action = "Copy" },
+  { key = "V", mods = "Control", action = "Paste" },
+
+  { key = "Return", mods = "Alt", action = "CreateNewWindow" },
+
+  { key = "J", mods = "Control|Shift", action = "DecreaseFontSize" },
+  { key = "K", mods = "Control|Shift", action = "IncreaseFontSize" },
+  { key = "U", mods = "Control|Shift", action = "ResetFontSize" }
+]

@@ -16,27 +16,34 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Iosevka Custom Regular 11
+font pango:Iosevka Custom Regular 11 
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex-autostart --autostart --environment i3
-exec --no-startup-id xrandr --output eDP-1 --off
-exec --no-startup-id flameshot
-
-
-
-
+#exec --no-startup-id xrandr --output eDP-1 --off
+# Keyboard Layouts
+#exec --no-startup-id "setxkbmap -model pc105 -layout us,fr,ara -option 'grp:alt_shift_toggle'"
+#exec --no-startup-id xrandr --output eDP-1 --off
+# change wallpaper
+exec_always feh --bg-scale ~/Pictures/wallpapers/twin.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf -b
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
+# Prevent screen from blanking or turning off
+exec_always --no-startup-id xset s off
+exec_always --no-startup-id xset s noblank
+exec_always --no-startup-id xset -dpms
+
 
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+exec xrandr --output HDMI-1 --mode 1920x1080 --rate 120.00
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -49,8 +56,11 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
+
+# start a browser
+bindsym $mod+b exec firefox 
+
 
 # kill focused window
 bindsym $mod+q kill
@@ -182,7 +192,7 @@ mode "resize" {
 }
 # The same as default_border none
 default_border pixel 0
-bindsym $mod+r mode "resize"
+bindsym $moexec_always --no-startup-id picom --config ~/.config/picom/picom.conf -bd+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
